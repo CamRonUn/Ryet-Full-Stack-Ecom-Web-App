@@ -1,9 +1,11 @@
 CREATE TABLE USERS (
     EMAIL VARCHAR(100) PRIMARY KEY,
+    passwords VARCHAR(255),
     First_name VARCHAR(100),
     Last_name VARCHAR(100),
     Phone VARCHAR(20),
     Language VARCHAR(25),
+    role VARCHAR(20) DEFAULT 'customer',
     Date_Of_Birth DATE 
 );
 
