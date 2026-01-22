@@ -58,8 +58,9 @@ app.get('/', (req, res) => {
     res.send('Ecom API is running')
 });
  
-app.get('/users', db_users.GetUsers);
-
+app.get('/users', authentication_config.isAdmin, db_users.GetUsers);
+app.get('/users/:email', authentication_config.isAdminOrOwner, db_users.getUsersByEmail);
+app.put('/users/update/:email', authentication_config.isAdminOrOwner, db_users.updateUserByEmail)
 
 app.listen(PORT, () => {
     console.log(`API is running on http://localhost:${PORT}`)
