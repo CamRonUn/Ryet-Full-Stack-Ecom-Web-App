@@ -9,20 +9,15 @@ CREATE TABLE USERS (
     Date_Of_Birth DATE 
 );
 
-CREATE TABLE ADDRESS(
-    ID int PRIMARY KEY,
-    street VARCHAR(100),
-    suburb VARCHAR(50),
-    state VARCHAR(50),
-    Country VARCHAR(50)
-);
 
 CREATE TABLE ORDERS(
-    ID INT PRIMARY KEY,
+    ID INT PRIMARY KEY AUTOINCREMENT,
     date DATE,
     shipping_price float,
     User_email VARCHAR(100) REFERENCES USERS(EMAIL),
-    Address_ID INT REFERENCES ADDRESS(ID)
+    street_address VARCHAR(100),
+    city VARCHAR(50),
+    Country VARCHAR(50)
 );
 
 CREATE TABLE PRODUCT(

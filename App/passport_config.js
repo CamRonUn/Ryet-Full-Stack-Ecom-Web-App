@@ -129,7 +129,29 @@ const isAdminOrOwner = (req,res,next) => {
         return next()
     }
     res.status(403).json({ message: "Acess denied. You can only acess your own data."})
+    
+}
 
+const isIDOwner_orders = async (req,res,next) => {
+    const {id} = req.params
+    if(!req.user){
+    return res.status(401).json({ message: "Please log in to continue." });
+    }
+    try {
+        const email = await pool.query('SELECT user_email FROM orders WHERE id = $1', [id])
+        if (email.rows.length === 0){
+            res.status(404).json({message: "order not found"})
+        }
+        if (email.rows[0].user_email === req.user.email){
+            return next()
+        }
+        if (req.user.role === "admin"){
+            return next()
+        }
+        res.status(400).json({message: "you can only acess your orders"})
+    } catch (error){
+        res.status(500).json({error: error.error})
+    }
 }
 
 module.exports = {
@@ -139,5 +161,6 @@ module.exports = {
     findUserByEmail,
     isAdmin, 
     isOwner,
-    isAdminOrOwner
+    isAdminOrOwner,
+    isIDOwner_orders
 }

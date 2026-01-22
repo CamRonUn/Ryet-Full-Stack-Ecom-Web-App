@@ -8,6 +8,7 @@ const LocalStrategy = require("passport-local").Strategy
 const authentication_config = require('./passport_config')
 const session = require('express-session');
 const NotSoSecretKey = require('../env').NotSoSecretKey
+const db_orders = require('../Routes/Orders')
 
 app.use(bodyParser.json())
 app.use(
@@ -54,14 +55,26 @@ app.get('/logout', (req, res, next) => {
     });
 });
 
+
+//default path 
 app.get('/', (req, res) => {
     res.send('Ecom API is running')
 });
- 
+
+
+// user paths 
 app.get('/users', authentication_config.isAdmin, db_users.GetUsers);
 app.get('/users/:email', authentication_config.isAdminOrOwner, db_users.getUsersByEmail);
 app.put('/users/update/:email', authentication_config.isAdminOrOwner, db_users.updateUserByEmail)
+app.delete('/users/delete/:email', authentication_config.isAdminOrOwner, db_users.deleteUser)
 
+//order paths 
+app.get('/orders', authentication_config.isAdmin, db_orders.allOrders)
+app.get("/orders/:id", authentication_config.isIDOwner_orders, db_orders.findOrder)
+app.post("/orders/neworder", db_orders.newOrder)
+app.delete("/orders/delete/:id", authentication_config.isIDOwner_orders, db_orders.deleteOrder)
+app.put("/orders/update/:id", authentication_config.isIDOwner_orders, db_orders.updateOrder)
+    
 app.listen(PORT, () => {
     console.log(`API is running on http://localhost:${PORT}`)
 });

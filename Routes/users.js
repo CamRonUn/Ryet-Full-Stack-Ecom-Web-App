@@ -54,10 +54,28 @@ const updateUserByEmail = async (req, res) => {
     }
 };
 
+const deleteUser = async (req,res) => {
+    const {email} = req.body 
+
+    try{
+    const user = await pool.query('SELECT * FROM USERS WHERE email = $1', [email]);
+    if (user.rows.length === 0){ 
+        res.status(400).json({message: "user does not exist"})
+    }
+        await pool.query('DELETE FROM users WHERE email = $1', [email])
+        res.status(200).json({message: "succusfully deleted"})
+    } catch (error){
+        console.error(error)
+        res.status(500).json({error: "error"})
+    }
+    
+}
+
 
 
 module.exports = {
     GetUsers,
     getUsersByEmail,
-    updateUserByEmail
+    updateUserByEmail, 
+    deleteUser
 }
