@@ -9,6 +9,7 @@ const authentication_config = require('./passport_config')
 const session = require('express-session');
 const NotSoSecretKey = require('../env').NotSoSecretKey
 const db_orders = require('../Routes/Orders')
+const db_products = require('../Routes/Products')
 
 app.use(bodyParser.json())
 app.use(
@@ -74,7 +75,15 @@ app.get("/orders/:id", authentication_config.isIDOwner_orders, db_orders.findOrd
 app.post("/orders/neworder", db_orders.newOrder)
 app.delete("/orders/delete/:id", authentication_config.isIDOwner_orders, db_orders.deleteOrder)
 app.put("/orders/update/:id", authentication_config.isIDOwner_orders, db_orders.updateOrder)
-    
+
+// product paths 
+app.get('/product', db_products.getProduct)
+app.get('/product/:id', db_products.getProductByID)
+app.delete('/product/delete/:id', authentication_config.isAdmin, db_products.deleteProductByID)
+app.put('/product/update/:id', authentication_config.isAdmin, db_products.updateProductByID)
+app.post('/product/addproduct',  authentication_config.isAdmin, db_products.newProduct)
+
+
 app.listen(PORT, () => {
     console.log(`API is running on http://localhost:${PORT}`)
 });
