@@ -50,10 +50,23 @@ CREATE TABLE PRODUCT_CATAGORY(
 );
 
 CREATE TABLE ORDERS_PRODUCT(
+    id int PRIMARY KEY,
     Product_ID int REFERENCES PRODUCT(ID),
-    Orders_ID INT REFERENCES Orders(ID),
-    PRIMARY KEY (Product_ID, Orders_ID)
+    Orders_ID INT REFERENCES Orders(ID)
 );
+
+CREATE TABLE cart(
+    id int PRIMARY KEY,
+    User_email varchar(100) REFERENCES Users(email)
+);
+
+CREATE TABLE cart_product(
+    id int PRIMARY KEY,
+    cart_id int REFERENCES cart(id),
+    Product_ID int REFERENCES PRODUCT(id)
+);
+
+
 
 ALTER TABLE Users
 ADD CONSTRAINT CHK_Email_Format CHECK (Email LIKE '%_@__%.__%');

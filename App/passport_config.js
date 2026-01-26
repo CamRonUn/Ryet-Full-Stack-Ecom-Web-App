@@ -72,7 +72,12 @@ const Register = async(req, res) => {
         const newUser = await pool.query(
             'INSERT INTO USERS (EMAIL, passwords, First_name, Last_name, Phone, date_of_birth) VALUES ($1, $2, $3, $4, $5, $6) RETURNING EMAIL, First_name, role',
             [email, hashedPassword, first_name, last_name, phone, DOB]);
-
+        
+        const idResult = await pool.query("SELECT ID FROM cart ORDER BY ID DESC LIMIT 1");
+        const id = idResult.rows.length > 0 ? idResult.rows[0].id + 1 : 1;
+        const newCart = await pool.query(
+            'INSERT INTO cart Values($1, $2)', [id, email]
+        )
         res.status(201).json(newUser.rows[0]);
     } catch(err) {
         res.status(500).json({error: err.message});
@@ -154,6 +159,13 @@ const isIDOwner_orders = async (req,res,next) => {
     }
 }
 
+const isLoggedIn = (req, res, next) => {
+    if(!req.user){
+        return res.status(401).json({ message: "Please log in to continue." });
+    }
+    next()
+}
+
 module.exports = {
     Register,
     authorize,
@@ -162,5 +174,6 @@ module.exports = {
     isAdmin, 
     isOwner,
     isAdminOrOwner,
-    isIDOwner_orders
+    isIDOwner_orders,
+    isLoggedIn
 }

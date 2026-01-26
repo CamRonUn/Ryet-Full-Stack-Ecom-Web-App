@@ -10,6 +10,8 @@ const session = require('express-session');
 const NotSoSecretKey = require('../env').NotSoSecretKey
 const db_orders = require('../Routes/Orders')
 const db_products = require('../Routes/Products')
+const db_catagories = require('../Routes/catagories')
+const db_cart = require('../Routes/cart')
 
 app.use(bodyParser.json())
 app.use(
@@ -82,6 +84,20 @@ app.get('/product/:id', db_products.getProductByID)
 app.delete('/product/delete/:id', authentication_config.isAdmin, db_products.deleteProductByID)
 app.put('/product/update/:id', authentication_config.isAdmin, db_products.updateProductByID)
 app.post('/product/addproduct',  authentication_config.isAdmin, db_products.newProduct)
+
+// Catagories 
+app.get('/catagories/product/:id', db_catagories.allItemsInCatagory)
+app.get('/catagories', db_catagories.allCategories)
+app.put('/catagories/update/:id', authentication_config.isAdmin, db_catagories.updateCatagory)
+app.delete('/catagories/delete/:id', authentication_config.isAdmin , db_catagories.deleteCatagory)
+app.post('/catagories/product/add', authentication_config.isAdmin , db_catagories.addProductToCategory)
+app.post('/catagories/addcatagory', authentication_config.isAdmin , db_catagories.newCategory)
+
+//cart
+app.post('/cart/addproduct', authentication_config.isLoggedIn ,db_cart.addItemTocart)
+app.post('/cart/checkout', authentication_config.isLoggedIn, db_cart.checkout)
+app.get('/cart', authentication_config.isLoggedIn, db_cart.showCart)
+app.get('/cart/clear', authentication_config.isLoggedIn, db_cart.clearcart)
 
 
 app.listen(PORT, () => {
