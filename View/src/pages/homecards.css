@@ -1,0 +1,88 @@
+.Card {
+    flex-shrink: 0; /* Important: prevents cards from squishing */
+    width: 50vw;
+    height: 70vh;
+    background-color: rgb(57, 56, 58);
+    border-radius: 20px;
+}
+
+.wrapper {
+    position: sticky;
+    top: 0rem;
+    height: 100vh;
+    display: flex;
+    align-items: center; /* This keeps the cards vertically centered */
+    overflow: hidden;
+    justify-content: center;
+}
+
+.homecards {
+    display: flex;
+    gap: 3rem;
+    padding-left: 10vw;
+}
+
+.topFirst {
+    background-color: rgb(57, 56, 58);
+}
+
+.track {
+    height: 500vh;
+    position: relative;
+}
+
+image {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    top: 0;
+    z-index: -1;
+}
+
+.photo { position: relative; 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 20px;
+} 
+
+
+.content { position: absolute; 
+    top: 40%;
+    right: 1%;
+    width: 100%; 
+    padding: 1rem; 
+    color: white; 
+    border-radius: 20px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-shadow: 5px 5px 10px rgba(0,0,0,0.7);
+}
+
+.shop-btn { margin-top: 1rem;
+    padding: 0.5rem 0.8rem; 
+    background-color: white; /* Make it visible */ 
+    color: black; 
+    border-radius: 2rem; 
+    cursor: pointer; 
+    font-weight: 500; 
+    font-size: 1.5rem; 
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.5); 
+} 
+
+.shop-btn:hover { background-color: rgb(20, 20, 20); color: white; }
+
+.PhotoWrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    transition-duration: 5ms east-in-out; 
+    cursor: pointer;
+}
+
+.PhotoWrapper:hover { 
+   transform: scale(1.05); transition-duration: 300ms; 
+}

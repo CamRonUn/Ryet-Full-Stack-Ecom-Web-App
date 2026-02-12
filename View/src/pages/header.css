@@ -1,0 +1,82 @@
+
+.header-container {
+    display: flex;
+    color: black;
+    justify-content: space-between;
+    background-color: white;
+    height: 3rem;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+p {
+    background-color: rgba(0,0,0,0);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+li {
+    margin-right: 1rem;
+    background-color: rgba(0,0,0,0);
+    font-size: 1.1rem;
+}
+
+button {
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.header_logo {
+    margin-left: 4%;
+    background-color: rgba(0,0,0,0);
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.header_logo:hover {
+    cursor: pointer;
+}
+
+.header_utilities {
+    display: flex;
+    margin-right: 4%;
+    background-color: rgba(0,0,0,0);
+    align-items: center;
+}
+
+.icon-btn {
+    background-color: rgba(0,0,0,0);
+    color: black;
+    font-size: 1.5rem;
+}
+
+.icon-btn:hover {
+    cursor: pointer;
+}
+
+header {
+    position: sticky; /* or fixed/relative */
+    top: 0;
+    z-index: 100;
+}
+
+nav:hover {
+    color: rgb(141, 141, 141);
+}
+
+nav ul li:hover{
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}

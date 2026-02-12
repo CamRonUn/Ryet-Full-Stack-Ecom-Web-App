@@ -1,0 +1,389 @@
+openapi: 3.1.0
+info:
+  title: Full E-Commerce CRUD API
+  description: Complete CRUD operations for the Postgres E-commerce schema.
+  version: 1.0.0
+
+tags:
+  - name: User
+  - name: Product
+  - name: Category
+  - name: Address
+  - name: Order
+
+paths:
+  /product-categories:
+    post:
+      tags: [Product-categories]
+      summary: Link a product to a category
+      description: Adds an entry to the PRODUCT_CATAGORY table.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCategoryLink'
+      responses:
+        '201':
+          description: Product successfully linked to category.
+    delete:
+      tags: [Product-categories]
+      summary: Remove a product from a category
+      description: Deletes the link between a specific product and category.
+      parameters:
+        - name: product_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: category_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Link removed successfully.
+  /order-items:
+    post:
+      tags: [order-items]
+      summary: Add a product to an order
+      description: Adds an entry to the ORDERS_PRODUCT table.
+      requestBody:
+        required: true
+        content:
+          application/json:
+      responses:
+        '201':
+          description: Product added to order.
+    delete:
+      tags: [order-items]
+      summary: Remove a product from an order
+      parameters:
+        - name: order_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: product_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Product removed from order.
+  # --- USERS TABLE ---
+  /users:
+    get:
+      tags: [User]
+      summary: Get all users
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags: [User]
+      summary: Create new user (Register)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+  /users/{email}:
+    put:
+      tags: [User]
+      summary: Update a user
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated
+    delete:
+      tags: [User]
+      summary: Delete a user
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted
+
+  # --- PRODUCTS TABLE ---
+  /products:
+    get:
+      tags: [Product]
+      summary: Get all products
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags: [Product]
+      summary: Add a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product added
+  /products/{id}:
+    put:
+      tags: [Product]
+      summary: Update product details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Product updated
+    delete:
+      tags: [Product]
+      summary: Remove a product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Product deleted
+
+  # --- CATEGORY TABLE ---
+  /categories:
+    get:
+      tags: [Category]
+      summary: List all categories
+      responses:
+        '200':
+          description: List of categories
+    post:
+      tags: [Category]
+      summary: Create a category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Category created
+  /categories/{id}:
+    delete:
+      tags: [Category]
+      summary: Delete a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Category deleted
+
+  # --- ADDRESS TABLE ---
+  /addresses:
+    post:
+      tags: [Address]
+      summary: Add a new address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        '201':
+          description: Address saved
+  /addresses/{id}:
+    get:
+      tags: [Address]
+      summary: Get address by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Address details
+    delete:
+      tags: [Address]
+      summary: Delete an address
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Address deleted
+
+  # --- ORDERS TABLE ---
+  /orders:
+    get:
+      tags: [Order]
+      summary: Get all orders
+      responses:
+        '200':
+          description: List of orders
+    post:
+      tags: [Order]
+      summary: Place a new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order placed
+  /orders/{id}:
+    get:
+      tags: [Order]
+      summary: Get order details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order found
+    delete:
+      tags: [Order]
+      summary: Cancel/Delete an order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Order removed
+
+
+components:
+  schemas:
+    User:
+      type: object
+      required: [email, passwords, first_name, last_name]
+      properties:
+        email:
+          type: string
+          format: email
+          pattern: '^[^%;%/!)]+$'
+        passwords:
+          type: string
+          minLength: 9
+          pattern: '^[^%;%/!)]+$'
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        language:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+
+    Product:
+      type: object
+      required: [name, price]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        image:
+          type: string
+        weight:
+          type: number
+        description:
+          type: string
+
+    Category:
+      type: object
+      required: [name]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+
+    Address:
+      type: object
+      required: [street, suburb, country]
+      properties:
+        id:
+          type: integer
+        street:
+          type: string
+        suburb:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+
+    Order:
+      type: object
+      required: [user_email, address_id]
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+          format: date
+        shipping_price:
+          type: number
+        user_email:
+          type: string
+        address_id:
+          type: integer
