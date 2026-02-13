@@ -1,6 +1,4 @@
-import { Link, Outlet } from "react-router-dom"; // Changed from "react-router"
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './homepage.css';
 import first_vid from '../assets/homepage/grok-video-5b9e947f-ba51-49ca-b94b-ca47a596cdfc.mp4'
 import Footer from "./footer";
@@ -31,6 +29,7 @@ function HomePage() {
                 <div className="reviews">
                     <Reviews/>
                 </div>
+                <button className="finalButton">Shop Now</button>
             </div>
             <Footer/>
         </>

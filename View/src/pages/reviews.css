@@ -5,18 +5,20 @@
     align-items: center;
     gap: 2rem;
     padding-right: 2rem;
-    animation: spin 20s linear infinite;
+    animation: spin 50s linear infinite;
 }
 
 .reviewCard {
     flex: 0 0 25em;
     height: 30em;
     padding: 1em;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     border-radius: 20px;
     display: flex;
-    align-items: center;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .wrapperReviews {
@@ -36,3 +38,42 @@
     from { translate: 0;}
     to { translate: -100%; }
 }
+
+.reviewName{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    flex-direction: column;
+    padding-top: 2rem;
+    gap: 0.4rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0;
+}
+
+.reviewName img{
+    border-radius: 1000rem;
+    height: 3rem;
+    width: 3rem;
+    padding-right: 0.5rem;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+}
+
+.reviewDescription {
+    width: 90%;
+    flex-grow: 1; /* Takes up all available space in the middle */
+    display: flex; 
+    align-items: center; /* Vertically centers the text within that middle space */
+    justify-content: center;
+    text-align: center;
+}
+
+.Stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto; /* Pushes to the very bottom */
+    height: 3rem;
+}
+
