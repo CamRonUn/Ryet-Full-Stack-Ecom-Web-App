@@ -13,16 +13,28 @@ function Header() {
             <header>
                 <div className="header-container">
                     <div className="header_logo">
-                        <p>RYET</p>
+                        <Link to='/home'>
+                            <p>RYET</p>
+                        </Link>
                     </div>
 
-                    <nav class="header_catagory">
+                    <nav className="header_catagory">
                         <ul>
-                            <li>Saddles</li>
-                            <li>Handlebar</li>
-                            <li>Pedals</li>
-                            <li>Wheels</li>
-                            <li>Bike Hubs</li>
+                            <Link to='/catalog/Saddles'>
+                                <li>Saddles</li>
+                            </Link>
+                            <Link to='/catalog/Handlebars'>
+                                <li>Handlebar</li>
+                            </Link>
+                            <Link to='/catalog/Pedals'>
+                                <li>Pedals</li>
+                            </Link>
+                            <Link to='/catalog/Wheels'>
+                                <li>Wheels</li>
+                            </Link>
+                            <Link to='/catalog/Bike Hubs'>
+                                <li>Bike Hubs</li>
+                            </Link>
                         </ul>
                     </nav>
 

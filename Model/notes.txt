@@ -1,0 +1,17 @@
+Features to further implement and imporve
+    - NEED TO MAKE TESTING SUITE 
+    - improved order price tracking (as project finished i relised if the price of a product changes so does value of previous order's)
+    - shipping cost calculator 
+    - collect more user information 
+    - add a cart when a user registers 
+    - checkout could be improved by using a subquery instead of a for loop however it was a easier implementation for me to work out 
+    - add other Oauth options such as google 
+
+
+Things i Learnt 
+    - Database needs better planning with a focus on function not just normalisation 
+    - Cart and order functionality needs to be built into a data base further highlighting importance of better planning around function 
+    - Build a test suite as i go could save significant time 
+    - User Authentication with passport 
+    - CRUD API 
+    - If a customer wants to order 2 of the same item i cant use a comosite foriegn key as it will cause integrety error
