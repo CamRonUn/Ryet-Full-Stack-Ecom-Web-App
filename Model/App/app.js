@@ -13,6 +13,8 @@ const db_orders = require('../Routes/Orders')
 const db_products = require('../Routes/Products')
 const db_catagories = require('../Routes/catagories')
 const db_cart = require('../Routes/cart')
+const { param } = require('express-validator');
+
 
 app.use(bodyParser.json())
 app.use(
@@ -70,30 +72,32 @@ app.get('/', (req, res) => {
 
 // user paths 
 app.get('/users', authentication_config.isAdmin, db_users.GetUsers);
-app.get('/users/:email', authentication_config.isAdminOrOwner, db_users.getUsersByEmail);
-app.put('/users/update/:email', authentication_config.isAdminOrOwner, db_users.updateUserByEmail)
+app.get('/users/:email', param('email').trim().escape(), authentication_config.isAdminOrOwner, db_users.getUsersByEmail);
+app.put('/users/update/:email', param('email').trim().escape(), authentication_config.isAdminOrOwner, db_users.updateUserByEmail)
 app.delete('/users/delete/:email', authentication_config.isAdminOrOwner, db_users.deleteUser)
 
 //order paths 
 app.get('/orders', authentication_config.isAdmin, db_orders.allOrders)
-app.get("/orders/:id", authentication_config.isIDOwner_orders, db_orders.findOrder)
+app.get("/orders/:id", param('id').trim().escape().isNumeric(), authentication_config.isIDOwner_orders, db_orders.findOrder)
 app.post("/orders/neworder", db_orders.newOrder)
-app.delete("/orders/delete/:id", authentication_config.isIDOwner_orders, db_orders.deleteOrder)
-app.put("/orders/update/:id", authentication_config.isIDOwner_orders, db_orders.updateOrder)
+app.delete("/orders/delete/:id", param('id').trim().escape().isNumeric(), authentication_config.isIDOwner_orders, db_orders.deleteOrder)
+app.put("/orders/update/:id", param('id').trim().escape().isNumeric(), authentication_config.isIDOwner_orders, db_orders.updateOrder)
 
 // product paths 
 app.get('/product', db_products.getProduct)
-app.get('/product/:id', db_products.getProductByID)
+//app.get('/product/:id', db_products.getProductByID)
+app.get('/product/search/:searchterm', param('searchterm').trim().escape(), db_products.getProductBySearch)
+
 app.delete('/product/delete/:id', authentication_config.isAdmin, db_products.deleteProductByID)
-app.put('/product/update/:id', authentication_config.isAdmin, db_products.updateProductByID)
+app.put('/product/update/:id', param('id').trim().escape().isNumeric(), authentication_config.isAdmin, db_products.updateProductByID)
 app.post('/product/addproduct',  authentication_config.isAdmin, db_products.newProduct)
 
 // Catagories 
-app.get('/catagories/name/:name', db_catagories.catagoryByName)
-app.get('/catagories/product/:id', db_catagories.allItemsInCatagory)
+app.get('/catagories/name/:name', param('name').trim().escape(), db_catagories.catagoryByName)
+app.get('/catagories/product/:id', param('id').trim().escape().isNumeric(), db_catagories.allItemsInCatagory)
 app.get('/catagories', db_catagories.allCategories)
-app.put('/catagories/update/:id', authentication_config.isAdmin, db_catagories.updateCatagory)
-app.delete('/catagories/delete/:id', authentication_config.isAdmin , db_catagories.deleteCatagory)
+app.put('/catagories/update/:id', param('id').trim().escape().isNumeric(), authentication_config.isAdmin, db_catagories.updateCatagory)
+app.delete('/catagories/delete/:id', param('id').trim().escape().isNumeric(), authentication_config.isAdmin , db_catagories.deleteCatagory)
 app.post('/catagories/product/add', authentication_config.isAdmin , db_catagories.addProductToCategory)
 app.post('/catagories/addcatagory', authentication_config.isAdmin , db_catagories.newCategory)
 

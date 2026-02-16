@@ -4,6 +4,8 @@ import first_vid from '../../assets/homepage/grok-video-5b9e947f-ba51-49ca-b94b-
 import Footer from "../footer";
 import HomeCards from "./homecards";
 import Reviews from "./reviews";
+import { Link } from "react-router-dom"; 
+
 
 function HomePage() {
     return (
@@ -15,7 +17,9 @@ function HomePage() {
                 <div className="Maincontent">
                     <h1>RYET</h1>
                     <p>Revolutionizing Cycling Performance</p>
-                    <button>Find Speed</button>
+                    <Link to='/products/'>
+                        <button>Find Speed</button>
+                    </Link>
                 </div>
             </div>
             <div className="secondScreen">  
@@ -29,7 +33,9 @@ function HomePage() {
                 <div className="reviews">
                     <Reviews/>
                 </div>
-                <button className="finalButton">Shop Now</button>
+                <Link to='/products/'>
+                    <button className="finalButton">Shop Now</button>
+                </Link>
             </div>
             <Footer/>
         </>

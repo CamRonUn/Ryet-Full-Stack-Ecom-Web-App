@@ -1,7 +1,6 @@
 import './productTile.css'
 import { useState } from 'react';
 import React from 'react'
-import pic from '../../assets/homepage/bikehub.jpg'
 
 function ProductTile({ item }) {
 

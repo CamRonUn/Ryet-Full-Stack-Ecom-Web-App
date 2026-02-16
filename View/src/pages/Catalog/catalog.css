@@ -5,7 +5,8 @@
     padding: 0.5rem;
     max-width: 90vw;
     margin: 0 auto;
-
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .CatalogTitle {
@@ -16,7 +17,6 @@
     margin-top: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgb(91, 91, 91);
     border-top: 1px solid rgb(91, 91, 91);
     width: 100%;
 }
@@ -40,4 +40,19 @@
 
 .catalogFilter select:hover {
     color: #000000;
+}
+
+.DescriptionCatalog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem 2rem 1rem;
+    border-bottom: 1px solid rgb(91, 91, 91);
+}
+
+.DescriptionCatalog p{
+    width: 90%;
+    border-top: 1px solid rgb(164, 164, 164);
+    padding-top: 1rem;
 }

@@ -1,7 +1,7 @@
 const {pool} = require('../DB/index');
 
 const getProduct = (req, res) => {
-    pool.query('SELECT * FROM product',(error, results) => {
+    pool.query('SELECT P.ID AS "Product ID", P.name AS "Product Name", P.price AS "Price", P.Image AS "Image", P.Weight AS "Weight", P.description AS "description", P.image2 AS "image2", P.otherimages AS "otherimages" FROM Product AS P',(error, results) => {
         if (error){
             throw error
         }
@@ -85,10 +85,22 @@ const newProduct = async (req,res) => {
     }
 }
 
+const getProductBySearch = async (req, res) => {
+    const {searchterm} = req.params
+    const value = `%${searchterm}%`
+    try{
+        const results = await pool.query('SELECT P.ID AS "Product ID", P.name AS "Product Name", P.price AS "Price", P.Image AS "Image", P.Weight AS "Weight", P.description AS "description", P.image2 AS "image2", P.otherimages AS "otherimages" FROM Product AS P WHERE P.name ILIKE $1', [value])
+        res.status(200).json(results.rows)
+    } catch (error) {
+        throw (error)
+    }
+}
+
 module.exports = {
     getProduct,
     getProductByID,
     deleteProductByID,
     updateProductByID,
-    newProduct
+    newProduct, 
+    getProductBySearch
 }

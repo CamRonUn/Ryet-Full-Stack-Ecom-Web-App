@@ -56,6 +56,9 @@ function Catalog() {
                 </select>
             </div>
         </div>
+        <div className="DescriptionCatalog">
+            <p>{catagory.description}</p>
+        </div>
         <div className="CatalogGrid">
             {SortedProducts.map(product => (
                 <ProductTile key={product["product ID"]} item={product} />
