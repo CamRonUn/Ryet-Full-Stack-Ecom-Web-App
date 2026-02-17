@@ -5,8 +5,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import './header.css';
+import { useState } from "react";
+import Searchbar from './searchbar'
 
 function Header() {
+
+    const [searchBarVis, setSearchBarVis ] = useState(false)
+
+    if (searchBarVis) {
+        return (
+            <>
+            <Searchbar searchBarVis={searchBarVis} setSearchBarVis={setSearchBarVis}/>
+            <Outlet/>
+            </>
+        )
+    }
 
     return (
         <>
@@ -41,7 +54,7 @@ function Header() {
                     <div className="header_utilities">
                         <ul>
                             <li>
-                                <button className="icon-btn" aria-label="Search">
+                                <button className="icon-btn" aria-label="Search" onClick={() => setSearchBarVis(true)}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                 </button>
                             </li>

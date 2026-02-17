@@ -1,0 +1,68 @@
+.SearchBar {
+    position: fixed; /* or fixed/relative */
+    top: 0;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    font-weight: 900;
+}
+
+.closeSearchBar {
+    text-decoration: underline;
+    align-self:flex-end;
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+}
+
+.closeSearchBar p{
+    color: rgb(125, 125, 125);
+    text-decoration: underline;
+    align-self: center;
+    justify-self: right;
+    cursor: pointer;
+
+}
+
+.closeSearchBar p:hover {
+    color: black;
+    scale: 1.1;
+}
+
+.SearchBarOverlay {
+    position: fixed; /* or fixed/relative */
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background-color: rgba(0, 0, 0,0.5);
+    height: 100vh;
+    cursor: pointer;
+}
+
+.SearchInputSection input {
+    appearance: none;
+    -webkit-appearance: none;
+    /* Remove the box/border */
+    border: none;
+    background: transparent;
+    outline: none;
+    /* Reset spacing and font to inherit from parent */
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    font-size: 3rem;
+}
+
+.SearchInputSection {
+    width: 90%;
+    justify-self: center;
+    align-self: center;
+    border-bottom: 2px solid black;
+    margin-top: 0.5rem;
+}
