@@ -73,7 +73,7 @@ function Header() {
 
                 </div>
             </header>
-            <Outlet/>
+            <Outlet />
         </>
     )
 }

@@ -68,14 +68,36 @@ const deleteUser = async (req,res) => {
         console.error(error)
         res.status(500).json({error: "error"})
     }
-    
 }
 
+const checkLogin = (req,res) => {
+    if (req.user) {
+        res.status(200).json({user: true})
+    } else {
+        res.status(200).json({user: false})
+    }
+}
+
+const checkuser = async (req,res) => {
+    try {
+        const {email} = req.params
+        const users = await pool.query('SELECT email FROM Users Where email = $1', [email]);
+        if (users.rows.length > 0) {
+            res.status(200).json({user: true})
+        } else {
+            res.status(200).json({user: false})
+        }
+    } catch (e) {
+        throw (e)
+    }
+}
 
 
 module.exports = {
     GetUsers,
     getUsersByEmail,
     updateUserByEmail, 
-    deleteUser
+    deleteUser, 
+    checkLogin,
+    checkuser
 }
