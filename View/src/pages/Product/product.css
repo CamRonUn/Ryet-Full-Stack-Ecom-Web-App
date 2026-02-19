@@ -1,0 +1,110 @@
+/* Product Page Layout */
+.ProductPage {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Image gets slightly more space */
+    min-height: calc(100vh - 80px); /* Adjust based on your header height */
+    background-color: #fff;
+    gap: 40px;
+    padding: 2rem 5%;
+}
+
+/* Photo Section */
+.ProductPhoto {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.ProductPhoto img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    object-fit: contain; /* Keeps bike parts from being cropped awkwardly */
+}
+
+/* Right Side Content */
+.RightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+.InformationSection h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: #000;
+}
+
+.InformationSection .description {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Purchase Section */
+.PurchuseOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto; /* Pushes buttons to bottom of content area */
+    padding-bottom: 2rem;
+}
+
+/* Matching your Login "Sign In" Button */
+.BuyNow {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.BuyNow:hover {
+    background-color: #222;
+    transform: translateY(-2px);
+}
+
+/* Matching your Login "Sign Up" Button */
+.addToCart {
+    background-color: transparent;
+    color: #000;
+    border: 2px solid #000;
+    padding: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.addToCart:hover {
+    background-color: #f5f5f5;
+}
+
+/* Recommended Products Placeholder */
+.RecomendedProducts {
+    padding: 4rem 5%;
+    border-top: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 900px) {
+    .ProductPage {
+        grid-template-columns: 1fr;
+        padding-top: 0;
+    }
+    
+    .InformationSection h1 {
+        font-size: 1.8rem;
+    }
+}

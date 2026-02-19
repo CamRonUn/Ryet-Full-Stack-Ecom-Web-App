@@ -40,3 +40,4 @@ export const indexSearchProducts = async (searchterm) => {
         throw (err)
     }
 } 
+

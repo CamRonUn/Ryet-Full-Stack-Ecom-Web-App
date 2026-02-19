@@ -5,6 +5,8 @@ import Catalog from './pages/Catalog/catalog'
 import SearchCatalog from './pages/Catalog/Searchcatalog'
 import Account from './pages/account/account'
 import Register from './pages/account/Register'
+import ProductPage from './pages/Product/product'
+import {CurrencyProvider} from './util/currencyContext'
 
 
 const appRouter = createBrowserRouter(createRoutesFromElements(
@@ -16,13 +18,16 @@ const appRouter = createBrowserRouter(createRoutesFromElements(
     <Route path="/products" element={ <SearchCatalog/> } />
     <Route path="/account" element={ <Account/>} />
     <Route path="/register" element ={ <Register/> } />
+    <Route path="/Product/:productID" element={ <ProductPage/>} />
   </Route>
 )) 
 
 function App() {
   
   return (
+    <CurrencyProvider>
       <RouterProvider router={appRouter} />
+    </CurrencyProvider>
   )
 }
 

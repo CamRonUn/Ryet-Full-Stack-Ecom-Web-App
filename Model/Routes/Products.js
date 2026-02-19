@@ -11,7 +11,6 @@ const getProduct = (req, res) => {
 
 const getProductByID = (req,res) => {
     const {id} = req.params
-
     pool.query('SELECT * FROM product WHERE id = $1',[id], (error, results) => {
         if (error){
             throw error
@@ -96,11 +95,22 @@ const getProductBySearch = async (req, res) => {
     }
 }
 
+const getProdCatByID = async (req,res) => {
+    const {id} = req.params
+    try{
+        const results = await pool.query('SELECT PC.catagory_id, C.name FROM product_catagory AS PC, catagory AS C WHERE PC.catagory_id = C.id AND product_id = $1', [id])
+        res.status(200).json(results.rows)
+    } catch (error) {
+        throw (error)
+    }
+}
+
 module.exports = {
     getProduct,
     getProductByID,
     deleteProductByID,
     updateProductByID,
     newProduct, 
-    getProductBySearch
+    getProductBySearch,
+    getProdCatByID
 }

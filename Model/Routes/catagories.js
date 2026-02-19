@@ -111,6 +111,16 @@ const allItemsInCatagory = (req,res) => {
     })
 }; 
 
+const top10InCat = (req,res) => {
+    const {id} = req.params
+    pool.query('SELECT P.ID AS "id", P.name AS "name", P.price AS "Price", P.Image AS "image", P.Weight AS "weight", P.description AS "description", P.image2 AS "image2", P.otherimages AS "otherimages", count(OP.product_id) FROM Product AS P, Product_Catagory AS PC, orders_product AS OP  WHERE PC.product_id = P.id AND PC.catagory_id = $1 AND P.id = OP.product_id  GROUP BY PC.product_id, p.id, OP.product_id ORDER BY COUNT(OP.product_id) DESC LIMIT 10', [id], (error, results) => {
+        if (error){
+            throw error
+        }
+        res.status(200).json(results.rows)
+    })
+}
+
 module.exports = {
     allItemsInCatagory,
     updateCatagory,
@@ -118,5 +128,6 @@ module.exports = {
     allCategories,
     addProductToCategory,
     newCategory, 
-    catagoryByName
+    catagoryByName,  
+    top10InCat
 }

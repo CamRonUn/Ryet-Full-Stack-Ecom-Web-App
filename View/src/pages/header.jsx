@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import './header.css';
 import { useState } from "react";
 import Searchbar from './searchbar'
+import Currency from './currencySelector'
 
 function Header() {
 
@@ -53,6 +54,7 @@ function Header() {
 
                     <div className="header_utilities">
                         <ul>
+                            <Currency />
                             <li>
                                 <button className="icon-btn" aria-label="Search" onClick={() => setSearchBarVis(true)}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
