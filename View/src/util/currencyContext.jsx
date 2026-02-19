@@ -6,14 +6,14 @@ import {CurrencyContext} from './curencyHelper'
 
 
 export function CurrencyProvider({children}) {
-    const [currency, setCurrency] = useState('USD');
+    const [currency, setCurrency] = useState({code: 'CNY', symbol:'¥', label:'Yuan'});
     const [exchangeRates, setExchangeRates] = useState([])
 
     useEffect(() => {
         const getCurrency = async () => {
             try {
-                const exchangerate = await getExchangeRate()
-                setExchangeRates(exchangerate)
+                const exchangerateData = await getExchangeRate()
+                setExchangeRates(exchangerateData)
             } catch (error) {
                 console.log(error)
             }

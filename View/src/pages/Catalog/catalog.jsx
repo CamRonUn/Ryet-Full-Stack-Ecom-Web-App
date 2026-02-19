@@ -5,12 +5,14 @@ import ProductTile from './productTile'
 import './catalog.css'
 import Footer from "../footer";
 
+
 function Catalog() {
     const { catagoryname } = useParams();
     const [catagory, setCatagory] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading ] = useState(true);
     const [sortOption, setSort] = useState('Name');
+
 
     useEffect(() => {
         const loadData = async () => {
@@ -41,7 +43,7 @@ function Catalog() {
             <div className="Loading"></div>
         )
     }
-    console.log(products[0])
+
     return (
         <>
         <div className="CatalogTitle">

@@ -19,7 +19,7 @@ function Currency() {
     return (
         <div className="CurrencySelector" onClick={() => setIsCurrencyOpen(true)} onMouseLeave={() => setIsCurrencyOpen(false)}>
             <button className="CurrencyTrigger">
-                {currency} <span className="Arrow">↓</span>
+                {currency.code} <span className="Arrow">↓</span>
             </button>
             
             {isCurrencyOpen && (
@@ -29,7 +29,7 @@ function Currency() {
                             key={item.code} 
                             className="CurrencyOption"
                             onClick={() => {
-                                setCurrency(item.code);
+                                setCurrency(item);
                                 setIsCurrencyOpen(false);
                             }}
                         >

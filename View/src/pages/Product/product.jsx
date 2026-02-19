@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Footer from "../footer";
 import {indexProduct, indexProdsCat, indexCatsTop10} from '../../../../Controller/product'
 import './product.css'
+import {useCurrency} from '../../util/currencyContext'
+
 
 function ProductPage() {
     const { productID } = useParams()
@@ -11,6 +13,7 @@ function ProductPage() {
     const [productCat, setproductCat ] = useState([])
     const [catItmes, seletcatItems] = useState([])
     const [loading, setLoading] = useState(true)
+    const {exchangeRates, currency} = useCurrency()
 
     useEffect(() => {
         setLoading(true)
@@ -31,19 +34,13 @@ function ProductPage() {
         loaddata()
     }, [])
 
-    useEffect(() => {
-        console.log(productInfo)
-        console.log(loading)
-    }, [productInfo,loading])
 
     if (loading) {
         return (
             <></>
         )
     }
-    console.log(productCat)
-    console.log(catItmes)
-    console.log(productInfo)
+
     return (
         <>
             <div className="ProductPage">
@@ -53,7 +50,7 @@ function ProductPage() {
                 <div className="RightSide">
                     <div className="InformationSection">
                         <h1>{productInfo.name}</h1>
-                        <p className="Price">{productInfo.price}</p>
+                        <p className="Price"> Price: {exchangeRates ? currency.code === 'CNY' ? `${currency.symbol}${Math.round(productInfo.price * 100) /100}` : `${currency.symbol}${Math.round(productInfo.price * exchangeRates.cny[currency.code.toLowerCase()] * 100) / 100}` : `${productInfo.price}` } </p>
                         <p className="description">{productInfo.description}</p>
                     </div>
                     <div className="PurchuseOptions">
