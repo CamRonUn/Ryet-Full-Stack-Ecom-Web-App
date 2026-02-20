@@ -92,12 +92,22 @@ const checkuser = async (req,res) => {
     }
 }
 
+const getCurrentUser = async (req,res) => {
+    if (req.user) {
+        const user = req.user
+        res.status(200).json({email: user.email, first_name: user.first_name, last_name: user.last_name})
+    } else {
+        res.status(404).json({message: "user not found"})
+    }
+}
 
+Built399
 module.exports = {
     GetUsers,
     getUsersByEmail,
     updateUserByEmail, 
     deleteUser, 
     checkLogin,
-    checkuser
+    checkuser, 
+    getCurrentUser
 }

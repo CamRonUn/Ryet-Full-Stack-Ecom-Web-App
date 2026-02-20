@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import login from '../../assets/account/Sign In Banner.jpg'
 import './account.css'
 import { useNavigate } from "react-router-dom";
+import Accountpage from "./accountPage";
 
 
 function Account() {
@@ -22,7 +23,6 @@ function Account() {
             setloading(true); 
             try {
                 const data = await checklogin()
-                console.log(data)
                 setisLoggedIn(data)               
             } catch (error) {
                 console.error("Cant determin login status:", error);
@@ -32,6 +32,7 @@ function Account() {
         }
         loadData()
     }, [] )
+
 
     const handleEmailKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -52,10 +53,8 @@ function Account() {
         e.preventDefault()
         const userData = await postLogin(username, password);
         setUser(userData);
-        console.log(userData)
         if (userData.user){
             setisLoggedIn({user: true})
-            console.log(isLoggedIn)
             setloginFail(false)
         } else {
             setloginFail(true)
@@ -94,7 +93,7 @@ function Account() {
         return (
             <>
                 <div className="Account">
-                    <h2>Account</h2>
+                    <Accountpage />
                 </div>
             </>
         )

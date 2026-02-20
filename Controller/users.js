@@ -93,3 +93,15 @@ export const PostSignUP = async (email, password, FirstName, LastName, phone, do
         return {user: null}
     }
 }
+
+export const getCurrentUser = async () => {
+    try {
+        const Response = await fetch(`${baseURL}/returnUser`, {
+            credentials: 'include'
+        })
+        const Data = await Response.json()
+        return Data
+    } catch (e) {
+        throw (e)
+    }
+}

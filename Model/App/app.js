@@ -85,6 +85,7 @@ app.get('/', (req, res) => {
 app.get('/users/:email', param('email').isEmail().trim().escape(), validate, authentication_config.isAdminOrOwner, db_users.getUsersByEmail);
 app.get('/checkloggin', db_users.checkLogin)
 app.get('/users/check/:email', param('email').isEmail().trim().escape(),validate, db_users.checkuser)
+app.get('/returnUser', db_users.getCurrentUser);
 //app.put('/users/update/:email', param('email').trim().escape(), validate, authentication_config.isAdminOrOwner, db_users.updateUserByEmail)
 //app.delete('/users/delete/:email', authentication_config.isAdminOrOwner, db_users.deleteUser)
 
