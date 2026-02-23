@@ -66,9 +66,9 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <button className="icon-btn" aria-label="Cart">
+                                <Link to="/Cart" className="icon-btn" aria-label="Cart">
                                     <FontAwesomeIcon icon={faCartArrowDown} />
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>

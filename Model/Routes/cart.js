@@ -45,7 +45,7 @@ const showCart = async (req,res) => {
     try{
         const findcartid = await pool.query('SELECT id FROM cart WHERE user_email = $1', [email])
         const cartid = findcartid.rows[0].id
-        const cart = await pool.query('SELECT PC.cart_id AS "Cart ID", P.id AS "Product ID", P.name AS "Product", P.Price as "Price", P.image AS "image" FROM cart_product AS PC JOIN Product AS P ON PC.product_id = P.ID WHERE PC.cart_id = $1', [cartid])
+        const cart = await pool.query('SELECT PC.id AS "id", PC.cart_id AS "Cart ID", P.id AS "Product ID", P.name AS "Product", P.Price as "Price", P.image AS "image", P.aliexpress_link AS "link" FROM cart_product AS PC JOIN Product AS P ON PC.product_id = P.ID WHERE PC.cart_id = $1', [cartid])
         res.status(200).json({cart: cart.rows})
     } catch(error){
         console.error(error)
@@ -85,10 +85,29 @@ const checkout = async (req,res) => {
     }
 }
 
+const removeProd = async (req,res) => {
+    const user = req.user
+    const {id} = req.params
+    if (!user) {
+        res.status(400).json({message: "No user found"})
+    }
+    try {
+        const UsersCart = await pool.query(`SELECT id FROM CART WHERE user_email = $1`, [user.email])
+        const ItemsCart = await pool.query('SELECT cart_id FROM cart_product Where id = $1', [id])
+        if (UsersCart.rows[0].id === ItemsCart.rows[0].cart_id){
+            const response = await pool.query("Delete FROM cart_product WHERE id = $1", [id])
+            res.status(200).json({status: "success"})
+        }
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+}
+
 module.exports = {
     addItemTocart,
     clearcart,
     showCart,
     checkout,
-    addProductToOrder
+    addProductToOrder,
+    removeProd
 }

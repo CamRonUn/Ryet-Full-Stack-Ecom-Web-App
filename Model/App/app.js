@@ -124,6 +124,7 @@ app.post('/cart/addproduct', authentication_config.isLoggedIn ,db_cart.addItemTo
 app.post('/cart/checkout', authentication_config.isLoggedIn, db_cart.checkout)
 app.get('/cart', authentication_config.isLoggedIn, db_cart.showCart)
 app.get('/cart/clear', authentication_config.isLoggedIn, db_cart.clearcart)
+app.delete('/cart/removeprod/:id', param('id').trim().escape().isNumeric(), validate,  authentication_config.isLoggedIn, db_cart.removeProd)
 
 
 app.listen(PORT, () => {

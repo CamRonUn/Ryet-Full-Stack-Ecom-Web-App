@@ -32,3 +32,16 @@ export const indexCart = async () => {
         console.error(err)
     }
 }
+
+export const RemoveFromCart = async (id) => {
+    try {
+        const response = await fetch(`${baseURL}/cart/removeprod/${id}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        const data = await response.json()
+        return data
+    } catch(err) {
+        throw (err)
+    }
+}
