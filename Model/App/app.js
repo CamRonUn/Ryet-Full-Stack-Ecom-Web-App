@@ -94,6 +94,9 @@ app.get('/returnUser', db_users.getCurrentUser);
 //app.get('/orders', authentication_config.isAdmin, db_orders.allOrders)
 app.get("/orders/:id", param('id').trim().escape().isNumeric(),validate, authentication_config.isIDOwner_orders, db_orders.findOrder)
 app.post("/orders/neworder", db_orders.newOrder)
+app.get("/usersOrders", db_orders.usersOrders)
+app.get("/top3productPhotos/:id", param('id').trim().escape().isNumeric(),validate, db_orders.top3productPhotos)
+app.get("/orderstotalprice/:id", param('id').trim().escape().isNumeric(),validate, db_orders.ordersTotalPrice )
 //app.delete("/orders/delete/:id", param('id').trim().escape().isNumeric(), validate,authentication_config.isIDOwner_orders, db_orders.deleteOrder)
 //app.put("/orders/update/:id", param('id').trim().escape().isNumeric(),validate, authentication_config.isIDOwner_orders, db_orders.updateOrder)
 

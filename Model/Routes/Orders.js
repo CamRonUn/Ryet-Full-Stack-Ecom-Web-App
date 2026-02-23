@@ -91,10 +91,60 @@ const allOrders = (req,res) => {
     })
 }
 
+const usersOrders = async (req,res) => {
+    const user = req.user
+    const email = user.email
+    if (!email) {
+        res.status(404).json({message:"user not found"})
+    }
+    try {
+        const orders = await pool.query("SELECT * FROM ORDERS WHERE user_email = $1", [email])
+        res.status(200).json(orders.rows)
+    } catch (err) {
+        res.status(500).json({message: "error getting orders"})
+        throw (err)
+    }
+}
+
+const top3productPhotos = async(req, res) => {
+    const {id} = req.params 
+
+    try {
+        const data = await pool.query('SELECT P.IMAGE as "image" FROM Orders_product AS OP, product AS P WHERE OP.product_id = P.id AND OP.orders_id  = $1 order BY p.ID LIMIT 3', [id])
+        res.status(200).json(data.rows)
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+}
+
+const ordersTotalPrice = async(req, res) => {
+    const {id} = req.params
+    if (!req.user) {
+        res.status(400).json({message: "Must Be logged in to acess order Info 1"})
+    }
+
+    const {email} = req.user
+    
+
+    try {
+        const userCheck = await pool.query('SELECT user_email FROM orders WHERE id = $1', [id])
+        if (userCheck.rows[0].user_email !== email) {
+            res.status(400).json({message: "Must Be logged in to acess order Info 2"})
+        }
+        const data = await pool.query("SELECT (sum(p.price) + (SELECT shipping_price from orders where id =$1)) AS total FROM orders AS O, orders_product AS OP, product AS p WHERE OP.orders_id = O.id AND OP.product_id = P.id AND O.id = $1", [id])
+        res.status(200).json(data.rows)
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+}
+
 module.exports = {
     newOrder, 
     deleteOrder,
     updateOrder,
     findOrder,
-    allOrders
+    allOrders,
+    usersOrders,
+    top3productPhotos,
+    ordersTotalPrice
 }

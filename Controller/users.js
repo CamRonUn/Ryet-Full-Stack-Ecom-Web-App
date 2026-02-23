@@ -9,7 +9,7 @@ export const checklogin = async () => {
     } catch (err) {
         throw err
     }
-}
+};
 
 export const postLogin = async (username, password) => {
     try {
@@ -38,7 +38,7 @@ export const postLogin = async (username, password) => {
         console.error("Network error:", err);
         return {user: null}
     }
-}
+};
 
 export const PostSignUP = async (email, password, FirstName, LastName, phone, dob) => {
     try {
@@ -92,7 +92,7 @@ export const PostSignUP = async (email, password, FirstName, LastName, phone, do
         console.log("fail")
         return {user: null}
     }
-}
+};
 
 export const getCurrentUser = async () => {
     try {
@@ -104,4 +104,16 @@ export const getCurrentUser = async () => {
     } catch (e) {
         throw (e)
     }
-}
+};
+
+export const indexUsersOrders = async () => {
+    try {
+        const response = await fetch(`${baseURL}/usersOrders`, {
+            credentials: 'include'
+        });
+        const data = await response.json()
+        return data
+    } catch (err) {
+        throw (err)
+    }
+};

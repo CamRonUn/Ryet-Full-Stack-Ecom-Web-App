@@ -101,7 +101,6 @@ const getCurrentUser = async (req,res) => {
     }
 }
 
-Built399
 module.exports = {
     GetUsers,
     getUsersByEmail,

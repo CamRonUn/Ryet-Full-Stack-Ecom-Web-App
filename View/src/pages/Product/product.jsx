@@ -5,6 +5,7 @@ import Footer from "../footer";
 import {indexProduct, indexProdsCat, indexCatsTop10} from '../../../../Controller/product'
 import './product.css'
 import {useCurrency} from '../../util/currencyContext'
+import {addProductToCart} from "../../../../Controller/cart"
 
 
 function ProductPage() {
@@ -55,7 +56,7 @@ function ProductPage() {
                     </div>
                     <div className="PurchuseOptions">
                         <button className="BuyNow">Buy Now</button>
-                        <button className="addToCart">Add To Cart</button>
+                        <button className="addToCart" onClick={() => {addProductToCart(productInfo.id)}}>Add To Cart</button>
                     </div>
                 </div>
             </div>

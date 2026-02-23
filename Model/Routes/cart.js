@@ -45,7 +45,7 @@ const showCart = async (req,res) => {
     try{
         const findcartid = await pool.query('SELECT id FROM cart WHERE user_email = $1', [email])
         const cartid = findcartid.rows[0].id
-        const cart = await pool.query('SELECT PC.cart_id AS "Cart ID", P.id AS "Product ID", P.name AS "Product", P.Price as Price FROM cart_product AS PC JOIN Product AS P ON PC.product_id = P.ID WHERE PC.cart_id = $1', [cartid])
+        const cart = await pool.query('SELECT PC.cart_id AS "Cart ID", P.id AS "Product ID", P.name AS "Product", P.Price as "Price", P.image AS "image" FROM cart_product AS PC JOIN Product AS P ON PC.product_id = P.ID WHERE PC.cart_id = $1', [cartid])
         res.status(200).json({cart: cart.rows})
     } catch(error){
         console.error(error)

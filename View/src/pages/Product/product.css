@@ -73,6 +73,10 @@
     transform: translateY(-2px);
 }
 
+.BuyNow:active{
+    scale: 1.05;
+}
+
 /* Matching your Login "Sign Up" Button */
 .addToCart {
     background-color: transparent;
@@ -88,6 +92,10 @@
 
 .addToCart:hover {
     background-color: #f5f5f5;
+}
+
+.addToCart:active {
+    scale:1.05;
 }
 
 /* Recommended Products Placeholder */
