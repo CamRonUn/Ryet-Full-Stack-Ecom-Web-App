@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {indexTop3, indexOrderPrice} from "../../../../Controller/orders"
 import {useCurrency} from '../../util/currencyContext'
+import { Link } from "react-router-dom";
 
 
 
@@ -46,6 +47,7 @@ function OrderListElement({ order }) {
             return "Dec"
         }
     }
+    const productLink = `/Order/${order.id}`
     const {exchangeRates, currency} = useCurrency()
     
     useEffect(() => {
@@ -63,7 +65,7 @@ function OrderListElement({ order }) {
             }
         }
         getPhotos()
-    }, [])
+    }, [order.id])
 
     if (loading) {
         return (
@@ -84,8 +86,10 @@ function OrderListElement({ order }) {
                     </div>
                 ))}
             </div>
-            <p className="ordertileText">Total Cost: {currency.symbol}{ orderPrice[0].total * Math.round(exchangeRates.cny[currency.code.toLowerCase()] * 100) / 100}</p>
-            <button className="ViewOrder">View Order</button>
+            <p className="ordertileText">Total Cost: {currency.symbol}{ Math.round(orderPrice[0].total * exchangeRates.cny[currency.code.toLowerCase()] * 100) / 100}</p>
+            <Link to={productLink}>
+                <button className="ViewOrder">View Order</button>
+            </Link>
         </div>
     )
 }

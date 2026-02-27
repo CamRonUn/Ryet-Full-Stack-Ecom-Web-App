@@ -21,3 +21,15 @@ export const indexOrderPrice = async (id) => {
         console.error(err)
     }
 }
+
+export const indexOrder = async (id) => {
+    try {
+        const response = await fetch(`${baseURL}/viewOrder/${id}`, {
+            credentials: "include"
+        });
+        const data = await response.json()
+        return data
+    } catch (err) {
+        console.error(err)
+    }
+}

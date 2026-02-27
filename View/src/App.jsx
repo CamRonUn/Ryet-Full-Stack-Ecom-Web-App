@@ -8,6 +8,7 @@ import Register from './pages/account/Register'
 import ProductPage from './pages/Product/product'
 import {CurrencyProvider} from './util/currencyContext'
 import CartPage from './pages/cart/cart'
+import ViewProduct from './pages/account/ViewOrder'
 
 
 const appRouter = createBrowserRouter(createRoutesFromElements(
@@ -21,6 +22,7 @@ const appRouter = createBrowserRouter(createRoutesFromElements(
     <Route path="/register" element ={ <Register/> } />
     <Route path="/Product/:productID" element={ <ProductPage/>} />
     <Route path="/Cart" element={ <CartPage/>} />
+    <Route path="/Order/:OrderId" element={ <ViewProduct/> } />
   </Route>
 )) 
 

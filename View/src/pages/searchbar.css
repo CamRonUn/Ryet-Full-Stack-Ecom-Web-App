@@ -66,3 +66,9 @@
     border-bottom: 2px solid black;
     margin-top: 0.5rem;
 }
+
+@media (max-width: 720px) {
+    .SearchInputSection input {
+        font-size: 1.5rem;
+    }
+}

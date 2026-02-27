@@ -8,10 +8,22 @@ import './header.css';
 import { useState } from "react";
 import Searchbar from './searchbar'
 import Currency from './currencySelector'
+import {checklogin} from "../../../Controller/users"
+import { useEffect } from "react";
+
 
 function Header() {
-
+    const [isLoggedIn, setLogin] = useState(false)
     const [searchBarVis, setSearchBarVis ] = useState(false)
+
+
+    useEffect(() => {
+        const getLogin = async () => {
+            const data = await checklogin()
+            setLogin(data)
+        }
+        getLogin()
+    })
 
     if (searchBarVis) {
         return (
@@ -67,7 +79,7 @@ function Header() {
                             </li>
                             <li>
                                 <Link to="/Cart" className="icon-btn" aria-label="Cart">
-                                    <FontAwesomeIcon icon={faCartArrowDown} />
+                                    {isLoggedIn.user ? <FontAwesomeIcon icon={faCartArrowDown} /> : <></>}
                                 </Link>
                             </li>
                         </ul>

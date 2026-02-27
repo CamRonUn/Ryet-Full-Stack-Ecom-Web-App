@@ -138,6 +138,22 @@ const ordersTotalPrice = async(req, res) => {
     }
 }
 
+const viewOrder = async (req,res) => {
+    const user = req.user
+    const {id} = req.params
+    try {
+        const orderUserEmail = await pool.query('SELECT user_email From Orders WHERE id = $1', [id])
+        if (orderUserEmail.rows[0].user_email === user.email) {
+            const data = await pool.query('SELECT P.name as "name", P.price AS price, P.id AS "product_id", p.image as "image", p.aliexpress_link as "Link", O.date AS "Date" FROM ORDERS AS O, ORDERS_product AS OP, Product AS P WHERE O.id = $1 AND O.id = OP.orders_id AND OP.product_id = P.id', [id])
+            res.status(200).json({data: data.rows, doesNotOwn: false})
+        } else {
+            res.status(400).json({message: "log in to get user data"})
+        }
+    } catch (err) {
+        res.status(500).json({doesNotOwn: true})
+    }
+}
+
 module.exports = {
     newOrder, 
     deleteOrder,
@@ -146,5 +162,6 @@ module.exports = {
     allOrders,
     usersOrders,
     top3productPhotos,
-    ordersTotalPrice
+    ordersTotalPrice,
+    viewOrder
 }

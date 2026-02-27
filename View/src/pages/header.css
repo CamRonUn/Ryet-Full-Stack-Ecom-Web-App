@@ -84,3 +84,9 @@ nav ul li:hover{
 Link {
     text-decoration: none;
 }
+
+@media (max-width:742px) {
+    .header_catagory{
+        display: none;
+    }
+}

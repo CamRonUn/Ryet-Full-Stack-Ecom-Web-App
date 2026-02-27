@@ -1,0 +1,33 @@
+.OrderItemTile{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    border-top: 1px black solid;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    padding-right: 2rem;
+}
+
+.OrderItemPrice {
+    padding-left:  2rem;
+}
+
+.OrderInfo {
+    padding: 1rem;
+    border-top: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media (max-width: 470px) {
+
+    .OrderItemTile {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .viewItemButton {
+        display: none;
+    }
+
+}

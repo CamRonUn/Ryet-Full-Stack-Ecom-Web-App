@@ -1,0 +1,44 @@
+.product-gallery-container {
+    width: 100%;
+    max-width: 500px; /* Adjust based on your layout */
+}
+
+.main-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Keeps the main image a perfect square */
+    overflow: hidden;
+    border: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.main-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.thumbnail-item {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Highlight the currently selected photo */
+.thumbnail-item.active-border {
+    border-color: black;
+}

@@ -45,7 +45,8 @@
 
 .orderTile {
     height: 6rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     border-top: 1px solid black;
     align-items: center;
     width: 100vw;
@@ -86,4 +87,25 @@
 
 .ordertileText {
     padding-left: 2rem;
+}
+
+@media (max-width: 720px) {
+    .ordertileImageContainer div:not(:first-child){
+        display: none;
+    }
+
+    .orderTile {
+    height: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr 1fr;
+    border-top: 1px solid black;
+    align-items: center;
+    width: 100vw;
+    justify-content: space-between;
+}
+
+    .loginPageBanner {
+        display: none;
+    }
+
 }

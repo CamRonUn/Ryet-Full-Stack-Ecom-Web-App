@@ -97,6 +97,7 @@ app.post("/orders/neworder", db_orders.newOrder)
 app.get("/usersOrders", db_orders.usersOrders)
 app.get("/top3productPhotos/:id", param('id').trim().escape().isNumeric(),validate, db_orders.top3productPhotos)
 app.get("/orderstotalprice/:id", param('id').trim().escape().isNumeric(),validate, db_orders.ordersTotalPrice )
+app.get("/viewOrder/:id",param('id').trim().escape().isNumeric(),validate, db_orders.viewOrder)
 //app.delete("/orders/delete/:id", param('id').trim().escape().isNumeric(), validate,authentication_config.isIDOwner_orders, db_orders.deleteOrder)
 //app.put("/orders/update/:id", param('id').trim().escape().isNumeric(),validate, authentication_config.isIDOwner_orders, db_orders.updateOrder)
 
