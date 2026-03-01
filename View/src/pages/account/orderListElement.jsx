@@ -78,7 +78,9 @@ function OrderListElement({ order }) {
 
     return (
         <div className="orderTile">
+            <Link to={productLink}>
             <p className="ordertileText">Order: {order.date.split('-')[2].slice(0,2)} {monthdate(order.date.split('-')[1])} {order.date.split('-')[0]}</p>
+            </Link>
             <div className="ordertileImageContainer">
                 {orderItemPhotos.map((photo) => (
                     <div className="ordertileImagesContainer">

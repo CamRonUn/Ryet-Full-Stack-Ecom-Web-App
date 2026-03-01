@@ -1,15 +1,22 @@
 import React from "react";
-import {getCurrentUser, indexUsersOrders} from '../../../../Controller/users'
+import {getCurrentUser, indexUsersOrders, getLogOut} from '../../../../Controller/users'
 import { useState, useEffect } from "react";
 import Footer from "../footer";
 import accountBanner from '../../assets/account page.jpg'
 import './accountpage.css'
 import OrderListElement from "./orderListElement";
+import { useNavigate } from "react-router-dom";
 
 function Accountpage() {
        const [mainUserData, setmainUserData] = useState([])
        const [loading, setloading] = useState(true)
        const [orders, setOrderes] = useState([])
+       const navigate = useNavigate();
+
+    const handLogOut = () => {
+        getLogOut()
+        navigate("/home")
+    }
 
         useEffect(() => {
             const loadUser = async () => {
@@ -55,6 +62,9 @@ function Accountpage() {
                     <div className="MightLike"></div>
                     <div className="FeedBack">
 
+                    </div>
+                    <div className="LogoutButton">
+                        <button onClick={handLogOut}>Log Out</button>
                     </div>
                 </div>
                 <Footer/>

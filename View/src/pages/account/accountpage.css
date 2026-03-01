@@ -34,6 +34,7 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid black;
 }
 
 .Orders h2 {
@@ -108,4 +109,33 @@
         display: none;
     }
 
+}
+
+.LogoutButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.LogoutButton button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.LogoutButton button:hover {
+    background-color: #d9363e;
+}
+
+.LogoutButton button:active {
+    transform: scale(0.97);
 }

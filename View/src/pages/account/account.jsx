@@ -14,7 +14,7 @@ function Account() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginFail, setloginFail] = useState(false);
-    const [user, setUser] = useState(null)
+    const [, setUser] = useState(null)
     const Navigate = useNavigate()
     const passwordInputRef = useRef(null);
 

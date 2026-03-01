@@ -48,6 +48,12 @@ function ProductPage() {
         )
     }
 
+    const handleBuyNow = () => {
+        console.log("pressed")
+        window.open(productInfo.aliexpress_link, '_blank', 'noopener')
+    }
+
+
     console.log(productInfo)
     return (
         <>
@@ -62,7 +68,7 @@ function ProductPage() {
                         <p className="description">{productInfo.description}</p>
                     </div>
                     <div className="PurchuseOptions">
-                        <button className="BuyNow">Buy Now</button>
+                        <button className="BuyNow" onClick={handleBuyNow()}>Buy Now</button>
                         <button className={isLoggedIn ? "addToCart" : ""} onClick={() => {addProductToCart(productInfo.id)}}>{isLoggedIn ? "Add To Cart" : ""}</button>
                     </div>
                 </div>

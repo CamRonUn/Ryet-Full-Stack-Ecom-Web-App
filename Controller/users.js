@@ -117,3 +117,13 @@ export const indexUsersOrders = async () => {
         throw (err)
     }
 };
+
+export const getLogOut = async () => {
+    try {
+        await fetch(`${baseURL}/logout`, {
+            credentials: "include"
+        })
+    } catch(err) {
+        throw(err)
+    }
+}
