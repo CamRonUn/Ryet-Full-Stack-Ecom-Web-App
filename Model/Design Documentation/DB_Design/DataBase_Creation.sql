@@ -7,7 +7,7 @@ CREATE TABLE USERS (
     Language VARCHAR(25),
     role VARCHAR(20) DEFAULT 'customer',
     Date_Of_Birth DATE,
-    google_id int
+    google_id varchar(256)
 );
 
 
