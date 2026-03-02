@@ -127,3 +127,7 @@ export const getLogOut = async () => {
         throw(err)
     }
 }
+
+export const loginWithGoogle = () => {
+    window.location.href = `${baseURL}/auth/google`;
+};

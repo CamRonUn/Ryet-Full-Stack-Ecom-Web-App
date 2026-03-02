@@ -1,5 +1,5 @@
 import React from "react";
-import {checklogin, postLogin} from '../../../../Controller/users'
+import {checklogin, postLogin, loginWithGoogle} from '../../../../Controller/users'
 import { useEffect, useState, useRef } from "react";
 import login from '../../assets/account/Sign In Banner.jpg'
 import './account.css'
@@ -61,6 +61,12 @@ function Account() {
         }
     }
 
+    const handleGoogleLogin = (e) => {
+        e.preventDefault()
+        loginWithGoogle()
+        console.log("google login attempt")
+    }
+
     if (loading) {
         return (
             <div>
@@ -83,6 +89,7 @@ function Account() {
                             <input type='password' value={password} onChange={handlePassword} placeholder="Password" ref={passwordInputRef} />
                             <button className="SignInButton" onClick={handleLogin} >Sign In</button>
                             <button className="SignUpnButton" onClick={() => Navigate('/register')} type='button'>Sign Up</button>
+                            <button className="GoogleSingIn" onClick={handleGoogleLogin}>Sign In With Google</button>
                             <p className="failedLogin">{loginFail ? "Incorrect Credentials" : ""}</p>
                         </form>
                     </div>

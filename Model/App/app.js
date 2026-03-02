@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config()
 const bodyParser = require('body-parser')
 const app = express();
 const cors = require('cors');
@@ -14,6 +15,8 @@ const db_products = require('../Routes/Products')
 const db_catagories = require('../Routes/catagories')
 const db_cart = require('../Routes/cart')
 const { param, body, validationResult} = require('express-validator');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const flash = require('connect-flash');
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -49,13 +52,45 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session())
+app.use(flash())
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/callback"
+    },
+    async function (acessToken, refreshToken, profile, cb) {
+        try{
+            const googleId = profile.id
+            const fName = profile.name.givenName
+            const lName = profile.name.familyName
+            const email = profile.emails?.[0].value;
+
+            console.log(profile)
+            console.log(email)
+
+            const user = await db_users.googleUser(googleId, email, fName, lName)
+            if(!user){
+                return cb(null, false, { message: "Account already exists. Please login normally." });
+            }
+
+            return cb(null,user);
+        } catch(err) {
+            console.error(err)
+            return cb(err,null);
+        }
+        
+    }
+))
 
 // user Authentication 
 passport.use(new LocalStrategy({ usernameField: 'email' }, authentication_config.login))
 passport.serializeUser((user, done) => {
   done(null,user.email)
 });
+
 passport.deserializeUser(authentication_config.findUserByEmail);
+
 
 app.post('/register', authentication_config.Register);
 
@@ -73,6 +108,16 @@ app.get('/logout', (req, res, next) => {
     });
 });
 
+//google Oauth 
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:5173/account', failureFlash: true }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:5173/');
+  });
 
 //default path 
 app.get('/', (req, res) => {

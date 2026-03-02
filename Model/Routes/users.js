@@ -101,6 +101,33 @@ const getCurrentUser = async (req,res) => {
     }
 }
 
+const googleUser = async (googleID, email, fname, lname) => { 
+
+    const existingUser = await pool.query(
+        "SELECT * FROM users WHERE email = $1",[email]
+    );
+
+    if (existingUser.rows.length > 0 && !existingUser.rows[0].google_id) {
+        return false
+    }
+
+    const result = await pool.query("SELECT * FROM USERS WHERE google_id = $1", [googleID])
+    let user = result.rows[0];
+
+
+    if (!user) {
+        const insertResult = await pool.query("INSERT INTO users(email, first_name, last_name, role, google_id) VALUES($1, $2, $3,'customer', $4) RETURNING *",[email,fname,lname,googleID])
+        user = insertResult.rows[0]
+        const idResult = await pool.query("SELECT ID FROM cart ORDER BY ID DESC LIMIT 1");
+        const id = idResult.rows.length > 0 ? idResult.rows[0].id + 1 : 1;
+        const newCart = await pool.query(
+            'INSERT INTO cart Values($1, $2)', [id, email]
+        )
+    } 
+
+    return user;
+}
+
 module.exports = {
     GetUsers,
     getUsersByEmail,
@@ -108,5 +135,6 @@ module.exports = {
     deleteUser, 
     checkLogin,
     checkuser, 
-    getCurrentUser
+    getCurrentUser,
+    googleUser
 }
