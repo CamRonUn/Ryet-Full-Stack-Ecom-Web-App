@@ -152,6 +152,10 @@ function Register() {
                             <input type='date' value={dob} onChange={handleDOB} ref={dobRef} placeholder="DOB" />
                             <button className="SignInButton" onClick={handleSignUp} >Register</button>
                             <button className="SignUpnButton" onClick={() => Navigate('/account')} type='button'>Sign in</button>
+                            <button className="google-login-btn">
+                                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="Google logo"/>
+                                <span>Sign Up with Google</span>
+                            </button>
                             <p className="failedLogin">{signUpFail ? signuperror : ""}</p>
                         </form>
                     </div>

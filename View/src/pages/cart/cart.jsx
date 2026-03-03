@@ -24,6 +24,7 @@ function CartPage() {
                 setLoading(true)
                 const logged = await checklogin()
                 setIsLoggedIn(logged)
+                console.log(logged)
                 if (logged) {
                     const cartData = await indexCart()
                     setItemsInCart(cartData)

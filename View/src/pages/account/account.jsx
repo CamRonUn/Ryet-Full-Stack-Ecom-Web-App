@@ -89,7 +89,10 @@ function Account() {
                             <input type='password' value={password} onChange={handlePassword} placeholder="Password" ref={passwordInputRef} />
                             <button className="SignInButton" onClick={handleLogin} >Sign In</button>
                             <button className="SignUpnButton" onClick={() => Navigate('/register')} type='button'>Sign Up</button>
-                            <button className="GoogleSingIn" onClick={handleGoogleLogin}>Sign In With Google</button>
+                            <button className="google-login-btn" onClick={handleGoogleLogin}>
+                                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="Google logo"/>
+                                <span>Sign in with Google</span>
+                            </button>
                             <p className="failedLogin">{loginFail ? "Incorrect Credentials" : ""}</p>
                         </form>
                     </div>

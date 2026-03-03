@@ -102,3 +102,56 @@
 .failedLogin {
     color: red;
 }
+
+.google-login-btn {
+    /* Layout - Matching your form flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    
+    /* Sizing - Matching .SignInButton */
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 40px;
+    border-radius: 4px;
+    
+    /* Aesthetics - Clean white background with black border */
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+    
+    /* Typography - Matching your style */
+    font-family: inherit; /* Use Quantico if inherited, or your default */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    
+    /* Animation - Matching your lift effect */
+    transition: all 0.3s ease;
+}
+
+.google-login-btn img {
+    width: 18px;
+    height: 18px;
+    /* Optional: Slightly de-saturate if you want a true monochrome look */
+    /* filter: grayscale(100%); */
+}
+
+/* Interaction States - Matching .SignUpnButton hover style */
+.google-login-btn:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.google-login-btn:active {
+    transform: translateY(0);
+}
+
+.google-login-btn:focus {
+    outline: none;
+    border: 2px solid #000; /* Extra visibility for keyboard focus */
+}
