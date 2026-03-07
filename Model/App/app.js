@@ -17,6 +17,9 @@ const db_cart = require('../Routes/cart')
 const { param, body, validationResult} = require('express-validator');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const flash = require('connect-flash');
+const db_stripe = require("../Routes/Stripe")
+app.use(express.static('public'));
+
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -65,9 +68,6 @@ passport.use(new GoogleStrategy({
             const fName = profile.name.givenName
             const lName = profile.name.familyName
             const email = profile.emails?.[0].value;
-
-            console.log(profile)
-            console.log(email)
 
             const user = await db_users.googleUser(googleId, email, fName, lName)
             if(!user){
@@ -137,12 +137,12 @@ app.get('/returnUser', db_users.getCurrentUser);
 
 //order paths 
 //app.get('/orders', authentication_config.isAdmin, db_orders.allOrders)
-app.get("/orders/:id", param('id').trim().escape().isNumeric(),validate, authentication_config.isIDOwner_orders, db_orders.findOrder)
+app.get("/orders/:id", param('id').trim().escape(),validate, authentication_config.isIDOwner_orders, db_orders.findOrder)
 app.post("/orders/neworder", db_orders.newOrder)
 app.get("/usersOrders", db_orders.usersOrders)
-app.get("/top3productPhotos/:id", param('id').trim().escape().isNumeric(),validate, db_orders.top3productPhotos)
-app.get("/orderstotalprice/:id", param('id').trim().escape().isNumeric(),validate, db_orders.ordersTotalPrice )
-app.get("/viewOrder/:id",param('id').trim().escape().isNumeric(),validate, db_orders.viewOrder)
+app.get("/top3productPhotos/:id", param('id').trim().escape(),validate, db_orders.top3productPhotos)
+app.get("/orderstotalprice/:id", param('id').trim().escape(),validate, db_orders.ordersTotalPrice )
+app.get("/viewOrder/:id",param('id').trim().escape(),validate, db_orders.viewOrder)
 //app.delete("/orders/delete/:id", param('id').trim().escape().isNumeric(), validate,authentication_config.isIDOwner_orders, db_orders.deleteOrder)
 //app.put("/orders/update/:id", param('id').trim().escape().isNumeric(),validate, authentication_config.isIDOwner_orders, db_orders.updateOrder)
 
@@ -157,8 +157,8 @@ app.get('/productcatagory/:id', param('id').trim().escape().isNumeric(), validat
 
 // Catagories 
 app.get('/catagories/name/:name', param('name').trim().escape(), validate, db_catagories.catagoryByName)
-app.get('/catagories/product/:id', param('id').trim().escape().isNumeric(), validate, db_catagories.allItemsInCatagory)
-app.get('/catagories/top10/:id', param('id').trim().escape().isNumeric(), validate, db_catagories.top10InCat)
+app.get('/catagories/product/:id', param('id').trim().escape(), validate, db_catagories.allItemsInCatagory)
+app.get('/catagories/top10/:id', param('id').trim().escape(), validate, db_catagories.top10InCat)
 app.get('/catagories', db_catagories.allCategories)
 //app.put('/catagories/update/:id', param('id').trim().escape().isNumeric(),validate, authentication_config.isAdmin, db_catagories.updateCatagory)
 //app.delete('/catagories/delete/:id', param('id').trim().escape().isNumeric(), validate, authentication_config.isAdmin , db_catagories.deleteCatagory)
@@ -170,7 +170,11 @@ app.post('/cart/addproduct', authentication_config.isLoggedIn ,db_cart.addItemTo
 app.post('/cart/checkout', authentication_config.isLoggedIn, db_cart.checkout)
 app.get('/cart', authentication_config.isLoggedIn, db_cart.showCart)
 app.get('/cart/clear', authentication_config.isLoggedIn, db_cart.clearcart)
-app.delete('/cart/removeprod/:id', param('id').trim().escape().isNumeric(), validate,  authentication_config.isLoggedIn, db_cart.removeProd)
+app.delete('/cart/removeprod/:id', param('id').trim().escape(), validate,  authentication_config.isLoggedIn, db_cart.removeProd)
+
+//Stripe
+app.post('/create-checkout-session', body("sessionId").trim().escape(), validate, db_stripe.createPaymentIntent )
+app.post('/verifyOrder', body("sessionId").trim().escape(), validate,  db_stripe.verifyOrder)
 
 
 app.listen(PORT, () => {

@@ -49,7 +49,6 @@ function ProductPage() {
     }
 
     const handleBuyNow = () => {
-        console.log("pressed")
         window.open(productInfo.aliexpress_link, '_blank', 'noopener')
     }
 

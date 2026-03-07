@@ -18,7 +18,8 @@ CREATE TABLE ORDERS(
     User_email VARCHAR(100) REFERENCES USERS(EMAIL),
     street_address VARCHAR(100),
     city VARCHAR(50),
-    Country VARCHAR(50)
+    Country VARCHAR(50),
+    postcode int
 );
 
 CREATE TABLE PRODUCT(

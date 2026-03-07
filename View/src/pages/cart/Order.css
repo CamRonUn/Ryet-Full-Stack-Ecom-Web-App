@@ -1,0 +1,138 @@
+:root {
+    --maap-black: #1a1a1a;
+    --maap-grey: #f4f4f4;
+    --maap-border: #e0e0e0;
+    --maap-accent: #2b2b2b; /* Or use a bold color like #d1fa31 for that MAAP vibe */
+}
+
+.OrderPage {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Shipping left, Summary right */
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--maap-black);
+}
+
+.OrderPageTitle {
+    grid-column: span 2;
+    text-align: left;
+    border-bottom: 1px solid var(--maap-black);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.OrderPageTitle h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+/* Shipping Section */
+.ShippingDetails h2 {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+.ShippingDetails form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ShippingDetailInput {
+    border: none;
+    border-bottom: 1px solid var(--maap-border);
+    padding: 12px 0;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    outline: none;
+}
+
+.ShippingDetailInput:focus {
+    border-bottom: 1px solid var(--maap-black);
+}
+
+/* Products/Summary Section */
+.ProductsOrder {
+    background-color: var(--maap-grey);
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.OrderConfirmItem {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--maap-border);
+}
+
+.CartTileImageeContainer img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    background: #fff;
+}
+
+.CartTileTitle {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+
+.OrderTotalPrice {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+}
+
+/* Bottom Action */
+.orderPageBottom {
+    grid-column: 1; /* Keep it under the shipping form */
+    margin-top: 2rem;
+}
+
+.ConfirmOrder {
+    width: 100%;
+    background-color: var(--maap-black);
+    color: white;
+    padding: 20px;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.ConfirmOrder:hover {
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .OrderPage {
+        grid-template-columns: 1fr;
+    }
+    .OrderPageTitle, .orderPageBottom {
+        grid-column: 1;
+    }
+    .ProductsOrder {
+        order: -1; /* Show summary first on mobile */
+    }
+}

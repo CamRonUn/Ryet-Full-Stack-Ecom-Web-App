@@ -88,7 +88,7 @@ function ViewProduct() {
     return (
         <>
         <div className="OrderInfo" >
-            <h1>Order #{OrderId}</h1>
+            <h1>Order #{OrderId.slice(0,15)}...</h1>
             <p className="OrderDate">{order[0].Date.split('-')[2].slice(0,2)} {monthdate(order[0].Date.split('-')[1])} {order[0].Date.split('-')[0]}</p>
         </div>
         <div className="ItemContainer">

@@ -49,7 +49,7 @@ function OrderListElement({ order }) {
     }
     const productLink = `/Order/${order.id}`
     const {exchangeRates, currency} = useCurrency()
-    
+    console.log(order.id)
     useEffect(() => {
         const getPhotos = async () => {
             try {

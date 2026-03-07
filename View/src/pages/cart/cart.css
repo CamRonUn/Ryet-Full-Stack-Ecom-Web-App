@@ -1,147 +1,166 @@
+:root {
+    --maap-black: #1a1a1a;
+    --maap-grey: #f9f9f9;
+    --maap-border: #e0e0e0;
+}
+
+/* Page Container */
+.CartPage {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+    border-top: none; /* Removing the old border for a cleaner start */
+}
+
+.CartPage h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: -1px;
+    padding: 0 0 2rem 0 !important;
+    border-bottom: 2px solid var(--maap-black);
+    margin-bottom: 0;
+}
+
+/* Individual Cart Rows */
 .CartTile {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 0.6fr;
-    border-top: 1px black solid;
-    justify-content: space-between;
+    grid-template-columns: 100px 2fr 1fr 1fr 1fr; /* Image first for better flow */
+    border-bottom: 1px solid var(--maap-border);
     align-items: center;
-    padding: 0.5rem 1rem;
-    padding-right: 2rem;
+    padding: 1.5rem 0;
+    transition: background-color 0.2s ease;
 }
 
+.CartTile:hover {
+    background-color: var(--maap-grey);
+}
 
+/* Re-orienting the content within the grid cells */
 .CartTileImageeContainer {
-    height: 5rem;
-    width: auto;
-    overflow: hidden;
+    grid-column: 1;
+    height: 80px;
+    width: 80px;
+    background: #fff;
+    padding: 5px;
 }
 
-.CartTileImageeContainer img{
+.CartTileImageeContainer img {
     height: 100%;
-    width: auto;
+    width: 100%;
     object-fit: contain;
 }
 
-.CartTileCloseButton {
-    color: rgb(101, 101, 101);
-    cursor: pointer;
-}
-
-.CartTileCloseButton:hover {
-    color: black;
+.CartTileTitle {
+    grid-column: 2;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    padding-left: 1rem;
 }
 
 .CartTilePrice {
-    padding-left:  2rem;
+    grid-column: 3;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-left: 0 !important;
 }
 
-
-.CartPage h1{
-    padding: 1rem 3rem;
-
+/* Buttons and Actions */
+.BuyNowButton {
+    grid-column: 4;
+    background-color: transparent;
+    color: var(--maap-black);
+    border: 1px solid var(--maap-black);
+    border-radius: 0; /* Sharp corners */
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.OrderDetails {
-    display: flex;
-    justify-content: space-evenly;
-    border-top: 3px solid black;
-    padding: 3rem
-}
-
-.CartPage {
-    border-top: 1px solid black;
+.BuyNowButton:hover {
+    background-color: var(--maap-black);
+    color: white;
+    transform: none;
+    box-shadow: none;
 }
 
 .CartTileCloseButton {
+    grid-column: 5;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #999;
+    cursor: pointer;
+    text-align: right;
+}
 
+.CartTileCloseButton:hover {
+  color: #1a1a1a;
+}
+
+/* Bottom Summary Section */
+.OrderDetails {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-top: 2px solid var(--maap-black);
+    padding: 2rem 20px;
+    background-color: transparent;
+}
+
+.OrderDetails p {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
 .OrderAll {
-  position: relative;
-  background-color: #4b87ff; /* Dark professional theme */
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+    background-color: var(--maap-black);
+    color: white;
+    border: none;
+    border-radius: 0; /* Sharp corners */
+    padding: 20px 60px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    width: 100%; /* Full width on small screens, or specific width */
+    max-width: 400px;
+    transition: opacity 0.2s ease;
 }
 
 .OrderAll:hover {
-  background-color: #7ac8ff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--maap-black);
+    opacity: 0.8;
+    transform: none;
+    box-shadow: none;
 }
 
-.OrderAll:active {
-  transform: translateY(0);
-}
-
-
-.BuyNowButton {
-  /* Colors & Background */
-  background-color: #e53e3e; /* A professional, slightly deep red */
-  color: #ffffff;
-  border: none;
-  
-  /* Sizing & Spacing */
-  padding: 12px 2px;
-  font-size: 16px;
-  font-weight: 600;
-  min-width: 10px;
-  max-width: 100px;
-  
-  /* Shape */
-  border-radius: 8px; /* The "slightly round" sweet spot */
-  
-  /* Interaction */
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Hover State */
-.BuyNowButton:hover {
-  background-color: #c53030; /* Darker red on hover */
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
-}
-
-/* Active/Click State */
-.BuyNowButton:active {
-  background-color: #9b2c2c;
-  transform: translateY(0);
-}
-
-/* Optional: Focus state for accessibility */
-.BuyNowButton:focus {
-  outline: 2px solid #fff;
-  outline-offset: -4px;
-}
-
-.tilespace {
-  display: none;
-}
-
-@media (max-width: 690px) {
-  .CartTile {
-      grid-template-columns: 1.5fr 1fr 1fr ;
-      gap:1rem
-  }
-
-  .tilespace {
-    display: flex;
-  }
-
-
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    .CartTile {
+        grid-template-columns: 80px 1fr 1fr;
+        gap: 0.5rem;
+    }
+    
+    .CartTileTitle { grid-column: 2 / span 2; }
+    .CartTilePrice { grid-column: 2; }
+    .BuyNowButton { grid-column: 2; width: fit-content; }
+    .CartTileCloseButton { grid-column: 3; }
+    
+    .OrderDetails {
+        align-items: center;
+    }
 }

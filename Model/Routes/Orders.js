@@ -52,7 +52,6 @@ const updateOrder = async (req,res) => {
         .map((key, index) => `${key} = $${index + 1}`)
         .join(', ');
 
-    console.log(setClause)
     values.push(id);
     const idPosition = values.length;
 

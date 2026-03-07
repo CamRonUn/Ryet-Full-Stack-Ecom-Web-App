@@ -6,6 +6,7 @@ import CartItemTile from './cartItemTile'
 import './cart.css'
 import Footer from '../footer'
 import {useCurrency} from '../../util/currencyContext'
+import { Link } from "react-router-dom";
 
 
 function CartPage() {
@@ -77,7 +78,9 @@ function CartPage() {
             </div>
             <div className="OrderDetails">
                 <p>Total Cost: {currency.symbol}{ Math.round(total * exchangeRates.cny[currency.code.toLowerCase()] * 100) / 100}</p>
-                <button className="OrderAll">Order</button>
+                <Link to="/OrderConfirm">
+                    <button className="OrderAll" >Order</button>
+                </Link>
             </div>
             <Footer/>
         </>

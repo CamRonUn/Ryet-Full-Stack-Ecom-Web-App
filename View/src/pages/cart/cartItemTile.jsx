@@ -13,7 +13,7 @@ function CartItemTile({item, setTotal, total}) {
     }
 
     const handleBuyNow = () => {
-
+        window.open(item.link, '_blank', 'noopener')
     }
 
     if (deleted) {
@@ -28,7 +28,7 @@ function CartItemTile({item, setTotal, total}) {
                 <img src={item.image} alt="TileImg" />
             </div>
             <div className="tilespace"></div>
-            <button className="BuyNowButton">Buy Now</button>
+            <button className="BuyNowButton" onClick={handleBuyNow}>Buy Now</button>
             <p className="CartTileCloseButton" onClick={() => handleDelete()}>x Remove From Cart</p>
 
         </div>
