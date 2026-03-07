@@ -39,4 +39,31 @@ A professional, full-stack e-commerce solution developed for **Ryet**, a Chinese
 
 ## 💻 Getting Started
 
-###
+### Prerequisites
+* Node.js (v22 recommended)
+* NVM (Node Version Manager)
+
+### Installation & Execution
+
+**1. Backend Server**
+*node model/app/app.js
+
+**2. Frontend Client
+*cd view
+*nvm use 22
+*npm run dev
+
+**Environment Configuration (.env)
+*Create a .env file in the root directory with the following variables:
+
+*GOOGLE_CLIENT_ID=your_id_here
+*GOOGLE_CLIENT_SECRET=your_secret_here
+*STRIPEKEY=your_stripe_key_here
+*CLIENT_URL=your_client_url_here
+
+## 📈 Roadmap & Future Enhancements
+*Session-less Carts: Implementing LocalStorage to allow guest users to build carts prior to authentication.
+
+*Webhook Integration: Transitioning from redirect-based order validation to Stripe Webhooks for more resilient server-side verification.
+
+*UI/UX Refinement: Further CSS optimization for mobile responsiveness and expanded high-resolution product catalogs.
