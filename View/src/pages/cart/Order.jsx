@@ -137,11 +137,10 @@ function OrderConfirm() {
                         <input type="text" id="City" value={City} placeholder="City" onKeyDown={handleCityKeyDown} onChange={handleCity} ref={CityRef} className="ShippingDetailInput" />
                         <input type="text" id="postCode" value={postCode} placeholder="PostCode" onKeyDown={handlePostCodeKeyDown} onChange={handlePostCode} ref={PostCodeRef} className="ShippingDetailInput" />
                         <input type="text" id="country" value={country} placeholder="Country" onChange={handleCountry} ref={CountryRef} className="ShippingDetailInput" />
-                        <button type="submit">Pay Now</button>
+                        <button type="submit" className="ConfirmOrder">Pay Now</button>
                     </form>
                 </div>
                 <div className="orderPageBottom">
-                    <button className="ConfirmOrder">Place Order</button>
                 </div>
             </div>
             <Footer/>
